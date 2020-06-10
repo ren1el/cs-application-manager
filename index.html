@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Application Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Application Manager</h1>
+
+    <button id="addButton">Add</button>
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <button id="closeAddModal">Close</button>
+            <form>
+                <label for="addCompanyName">Company:</label><br>
+                <input type="text" id="addCompanyName" name="addCompanyName"><br>
+
+                <label for="addJobTitle">Job Title:</label><br>
+                <input type="text" id="addJobTitle" name="addJobTitle"><br>
+
+                <label for="addDateApplied">Date Applied:</label><br>
+                <input type="text" id="addDateApplied" name="addDateApplied"><br>
+
+                <label for="addResponse">Response:</label><br>
+                <select name="addResponse" id="addResponse">
+                    <option selected value="noResponse">No Response</option>
+                    <option value="responded">Responded</option>
+                    <option value="rejected">Rejected</option>
+                </select><br>
+
+                <label for="addOffer">Offer?:</label><br>
+                <select name="addOffer" id="addOffer">
+                    <option selected value="noOffer">No</option>
+                    <option value="yesOffer">Yes</option>
+                </select><br>
+            </form>
+            <button id="submitAddModal">Submit</button>
+        </div>
+    </div>
+
+    <table id="main">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Job Title</th>
+                <th>Date Applied</th>
+                <th>Response</th>
+                <th>Offer?</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody id="appsTable">
+        </tbody>
+    </table>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <button id="closeEditModal">Close</button>
+            <form>
+                <label for="editCompanyName">Company:</label><br>
+                <input type="text" id="editCompanyName" name="editCompanyName"><br>
+
+                <label for="editJobTitle">Job Title:</label><br>
+                <input type="text" id="editJobTitle" name="editJobTitle"><br>
+
+                <label for="editDateApplied">Date Applied:</label><br>
+                <input type="text" id="editDateApplied" name="editDateApplied"><br>
+
+                <label for="response">Response:</label><br>
+                <select name="editResponse" id="editResponse">
+                    <option selected value="noResponse">No Response</option>
+                    <option value="responded">Responded</option>
+                    <option value="rejected">Rejected</option>
+                </select><br>
+
+                <label for="editOffer">Offer?:</label><br>
+                <select name="editOffer" id="editOffer">
+                    <option selected value="noOffer">No</option>
+                    <option value="yesOffer">Yes</option>
+                </select><br>
+            </form>
+            <button id="submitEditModal">Submit</button>
+            <button id="deleteAppButton">Delete</button>
+        </div>
+    </div>
+
+    <!-- FIREBASE CONFIGURATION -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAhvHzZ_OuZY2bzSsZrI9Q_WQDEKfmRGbY",
+            authDomain: "appmanager-1bf13.firebaseapp.com",
+            databaseURL: "https://appmanager-1bf13.firebaseio.com",
+            projectId: "appmanager-1bf13",
+            storageBucket: "appmanager-1bf13.appspot.com",
+            messagingSenderId: "79147370923",
+            appId: "1:79147370923:web:a93d11de70417555c5eaee"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <!-- ADDITIONAL SCRIPTS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
