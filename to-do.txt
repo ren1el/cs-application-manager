@@ -1,0 +1,9 @@
+APPLICATION MANAGER TO-DO
+
+* design / change colors
+* add datepicker
+* filter ongoing / abandoned applications
+* statistics (# apps, # responses, # offers)
+* add ability to add links to job description
+* error check forms
+* make responsive
