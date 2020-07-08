@@ -6,40 +6,43 @@
     <title>Application Manager</title>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>Application Manager</h1>
 
-    <button id="addButton">Add</button>
+    <button id="addButton" class="add"><i class="bx bxs-add-to-queue"></i></button>
     <div id="addModal" class="modal">
         <div class="modal-content">
-            <button id="closeAddModal">Close</button>
+            <button id="closeAddModal" class="modal-close btn">Close</button>
             <form>
-                <label for="addCompanyName">Company:</label><br>
-                <input type="text" id="addCompanyName" name="addCompanyName"><br>
+                <label for="addCompanyName">Company:</label>
+                <input type="text" id="addCompanyName" name="addCompanyName">
 
-                <label for="addJobTitle">Job Title:</label><br>
-                <input type="text" id="addJobTitle" name="addJobTitle"><br>
+                <label for="addJobTitle">Job Title:</label>
+                <input type="text" id="addJobTitle" name="addJobTitle">
 
-                <label for="addDateApplied">Date Applied:</label><br>
-                <input type="text" id="addDateApplied" name="addDateApplied"><br>
+                <label for="addDateApplied">Date Applied:</label>
+                <input type="text" id="addDateApplied" name="addDateApplied">
 
-                <label for="addResponse">Response:</label><br>
+                <label for="addResponse">Response:</label>
                 <select name="addResponse" id="addResponse">
                     <option selected value="noResponse">No Response</option>
                     <option value="responded">Responded</option>
                     <option value="rejected">Rejected</option>
-                </select><br>
+                </select>
 
-                <label for="addOffer">Offer?:</label><br>
+                <label for="addOffer">Offer?:</label>
                 <select name="addOffer" id="addOffer" disabled>
                     <option selected value="noOffer">No</option>
                     <option value="yesOffer">Yes</option>
-                </select><br>
+                </select>
             </form>
-            <button id="submitAddModal">Submit</button>
+            <div class="buttons">
+                <button id="submitAddModal" class="btn">Submit</button>
+            </div>
         </div>
     </div>
 
@@ -51,7 +54,6 @@
                 <th>Date Applied</th>
                 <th>Response</th>
                 <th>Offer?</th>
-                <th>Edit</th>
             </tr>
         </thead>
         <tbody id="appsTable">
@@ -60,32 +62,34 @@
 
     <div id="editModal" class="modal">
         <div class="modal-content">
-            <button id="closeEditModal">Close</button>
+            <button id="closeEditModal" class="modal-close btn">Close</button>
             <form>
-                <label for="editCompanyName">Company:</label><br>
-                <input type="text" id="editCompanyName" name="editCompanyName"><br>
+                <label for="editCompanyName">Company:</label>
+                <input type="text" id="editCompanyName" name="editCompanyName">
 
-                <label for="editJobTitle">Job Title:</label><br>
-                <input type="text" id="editJobTitle" name="editJobTitle"><br>
+                <label for="editJobTitle">Job Title:</label>
+                <input type="text" id="editJobTitle" name="editJobTitle">
 
-                <label for="editDateApplied">Date Applied:</label><br>
-                <input type="text" id="editDateApplied" name="editDateApplied"><br>
+                <label for="editDateApplied">Date Applied:</label>
+                <input type="text" id="editDateApplied" name="editDateApplied">
 
-                <label for="response">Response:</label><br>
+                <label for="response">Response:</label>
                 <select name="editResponse" id="editResponse">
                     <option value="noResponse">No Response</option>
                     <option value="responded">Responded</option>
                     <option value="rejected">Rejected</option>
-                </select><br>
+                </select>
 
-                <label for="editOffer">Offer?:</label><br>
+                <label for="editOffer">Offer?:</label>
                 <select name="editOffer" id="editOffer">
                     <option selected value="noOffer">No</option>
                     <option value="yesOffer">Yes</option>
-                </select><br>
+                </select>
             </form>
-            <button id="submitEditModal">Submit</button>
-            <button id="deleteAppButton">Delete</button>
+            <div class="buttons">
+                <button id="submitEditModal" class="btn">Submit</button>
+                <button id="deleteAppButton" class="btn">Delete</button>
+            </div>
         </div>
     </div>
 

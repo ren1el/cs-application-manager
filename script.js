@@ -5,7 +5,6 @@ const RESPONSE_CELL_INDEX = 3;
 const OFFER_CELL_INDEX = 4;
 const EDIT_BTN_CELL_INDEX = 5;
 
-
 var ApplicationManager = (function() {
     function generateID() {
         var date = new Date();
@@ -34,19 +33,19 @@ var ApplicationManager = (function() {
             "offer": offer
         });
         TableManager.updateTable();
-    }
+    };
 
     function deleteApp(appID) {
         firebase.database().ref("/applications/" + appID).remove();
         TableManager.updateTable();
-    }
+    };
 
     function getApplication(appID) {
         var data = firebase.database().ref("/applications/" + appID).once("value").then(function(snapshot) {
             return snapshot.val();
         });
         return data;
-    }
+    };
     
     return {
         addApp: addApp,
@@ -56,12 +55,11 @@ var ApplicationManager = (function() {
     };
 })();
 
-
 var TableManager = (function() {
     // DOM
     var appsTable = document.getElementById("appsTable");
 
-    // run functions
+    // run functions at the start
     displayTable();
 
     function addRow(appID) {
@@ -120,7 +118,8 @@ var TableManager = (function() {
 
     function addEditCell(newRow, appID) {
         var cell = newRow.insertCell(EDIT_BTN_CELL_INDEX);
-        cell.innerHTML = "<button id=\"" + appID + "\">Edit</button>";
+        cell.classList.add("edit");
+        cell.innerHTML = "<button id=\"" + appID + "\" class=\"btn\"><i class=\"bx bxs-edit\"></i></button>";
         document.getElementById(appID).onclick = EditModal.displayModal;
     };
 
@@ -162,13 +161,16 @@ var TableManager = (function() {
     };
 })();
 
-
 var AddModal = (function() {
     //DOM
     var addModal = document.getElementById("addModal");
     var addButton = document.getElementById("addButton");
     var closeButton = document.getElementById("closeAddModal");
     var submitButton = document.getElementById("submitAddModal");
+
+    var companyName = document.getElementById("addCompanyName");
+    var jobTitle = document.getElementById("addJobTitle");
+    var dateApplied = document.getElementById("addDateApplied");
     var response = document.getElementById("addResponse");
     var offer = document.getElementById("addOffer");
 
@@ -180,8 +182,8 @@ var AddModal = (function() {
 
     //functions
     function displayModal() {
-        addModal.style.display = "block";
-    }
+        addModal.classList.add("modal-active");
+    };
 
     function onResponseChanged() {
         if(response.value === "rejected" || response.value === "noResponse") {
@@ -190,21 +192,25 @@ var AddModal = (function() {
         } else {
             offer.disabled = false;
         }
-    }
+    };
 
     function closeModal() {
-        addModal.style.display = "none";
-    }
+        addModal.classList.remove("modal-active");
+    };
 
     function submitApp() {
-        var companyName = document.getElementById("addCompanyName").value;
-        var jobTitle = document.getElementById("addJobTitle").value;
-        var dateApplied = document.getElementById("addDateApplied").value;
-        var response = document.getElementById("addResponse").value;
-        var offer = document.getElementById("addOffer").value;
-
-        ApplicationManager.addApp(companyName, jobTitle, dateApplied, response, offer);
+        ApplicationManager.addApp(companyName.value, jobTitle.value, dateApplied.value, response.value, offer.value);
         closeModal();
+        resetFields();
+    };
+
+    function resetFields() {
+        companyName.value = "";
+        jobTitle.value = "";
+        dateApplied.value = "";
+        response.value = "noResponse";
+        offer.value = "noOffer";
+        onResponseChanged();
     }
 })();
 
@@ -229,10 +235,10 @@ var EditModal = (function() {
 
     function displayModal() {
         editingID = this.id;
-        editModal.style.display = "block";
+        editModal.classList.add("modal-active");
 
         populateFields(editingID);
-    }
+    };
 
     function populateFields(appID) {
         ApplicationManager.getApplication(appID).then(function(app) {
@@ -243,7 +249,7 @@ var EditModal = (function() {
             document.getElementById("editOffer").value = app.offer;
             setFieldConstraints();
         });
-    }
+    };
 
     function setFieldConstraints() {
         var response = document.getElementById("editResponse");
@@ -254,11 +260,11 @@ var EditModal = (function() {
         } else {
             offer.disabled = false;
         }
-    }
+    };
 
     function closeModal() {
-        editModal.style.display = "none";
-    }
+        editModal.classList.remove("modal-active");
+    };
 
     function submitEdit() {
         var companyName = document.getElementById("editCompanyName").value;
@@ -269,12 +275,12 @@ var EditModal = (function() {
 
         ApplicationManager.editApp(editingID, companyName, jobTitle, dateApplied, response, offer);
         closeModal();
-    }
+    };
 
     function deleteApp() {
         ApplicationManager.deleteApp(editingID);
         closeModal();
-    }
+    };
 
     return {
         displayModal: displayModal
